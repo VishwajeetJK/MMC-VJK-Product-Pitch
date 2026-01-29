@@ -515,7 +515,7 @@ function Simulator() {
       clearTimeout(t4);
       clearTimeout(t5);
     };
-  }, [activePrompt?.title, activePrompt?.agent]);
+  }, [activePrompt?.agent, activePrompt?.index]);
 
   // As new phases render more content, keep the output block roughly in view
   useEffect(() => {
@@ -590,15 +590,15 @@ function Simulator() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {prompts.map((item) => (
+              {prompts.map((item, index) => (
                 <button
                   key={item.title}
                   type="button"
                   onClick={() =>
-                    setActivePrompt({ agent: activeTitle, index: prompts.indexOf(item) })
+                    setActivePrompt({ agent: activeTitle, index })
                   }
                   className={`rounded-xl border p-4 text-left transition ${
-                    activePrompt?.agent === activeTitle && activePrompt.index === prompts.indexOf(item)
+                    activePrompt?.agent === activeTitle && activePrompt.index === index
                       ? "border-mmc-gold bg-mmc-gold/5"
                       : "border-black/10 bg-black/[0.02] hover:border-mmc-gold/30 hover:bg-mmc-gold/5"
                   }`}
@@ -615,7 +615,7 @@ function Simulator() {
                 {(() => {
                   const current = agentsData[activePrompt.agent][activePrompt.index];
                   if (!current) return null;
-                  const { prompt, thinking, workflow, data, reports } = current;
+                  const { thinking, workflow, data, reports } = current;
                   return (
                     <>
                 {/* AI thinking / prompt bubble */}
