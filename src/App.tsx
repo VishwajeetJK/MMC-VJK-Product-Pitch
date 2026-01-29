@@ -595,7 +595,7 @@ function Simulator() {
                   key={item.title}
                   type="button"
                   onClick={() =>
-                    setActivePrompt({ agent: activeTitle, index })
+                    setActivePrompt({ agent: activeTitle as AgentName, index })
                   }
                   className={`rounded-xl border p-4 text-left transition ${
                     activePrompt?.agent === activeTitle && activePrompt.index === index
