@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* MMC brand theme */
+@theme {
+  --color-mmc-deep: #130620;
+  --color-mmc-deep-alt: #1A0B2E;
+  --color-mmc-gold: #C8A355;
+  --color-mmc-gold-metallic: #D4AF37;
+  --color-mmc-white: #FFFFFF;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply antialiased;
+    font-family: var(--font-sans);
+    background-color: var(--color-mmc-deep);
+    color: var(--color-mmc-white);
+  }
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Custom range slider - gold track */
+input[type="range"].mmc-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  width: 100%;
+}
+input[type="range"].mmc-slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(200, 163, 85, 0.3);
+}
+input[type="range"].mmc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #C8A355;
+  cursor: pointer;
+  margin-top: -8px;
+  box-shadow: 0 0 12px rgba(200, 163, 85, 0.5);
+}
+input[type="range"].mmc-slider::-moz-range-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(200, 163, 85, 0.3);
+}
+input[type="range"].mmc-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #C8A355;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 12px rgba(200, 163, 85, 0.5);
+}
+
+/* Slow spin for central gear */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Pulsing gold connector lines (information passing) */
+@keyframes hex-pulse {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.hex-connector {
+  stroke: rgba(212, 175, 55, 0.6);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-dasharray: 4 96;
+  animation: hex-pulse 2s linear infinite;
+}
+
+.hex-connector-bg {
+  stroke: rgba(212, 175, 55, 0.15);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* Strategic Roadmap: gold line fill is driven by Framer Motion scrollYProgress in JS */
+.roadmap-line-track {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(200,163,85,0.12));
+}
